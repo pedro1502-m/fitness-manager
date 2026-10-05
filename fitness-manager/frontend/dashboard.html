@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fitness Manager - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+      <div class="brand"><span class="logo-sm">💪</span> Fitness Manager</div>
+      <nav class="nav" id="nav">
+        <button class="nav-btn active" data-section="summary">📊 Resumo</button>
+        <button class="nav-btn" data-section="workouts">🏋️ Treinos</button>
+        <button class="nav-btn" data-section="meals">🥗 Refeições</button>
+        <button class="nav-btn" data-section="profile">👤 Perfil</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="theme-toggle" class="btn ghost block">🌙 Tema</button>
+        <button id="logout-btn" class="btn ghost block">Sair</button>
+      </div>
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="content">
+      <header class="topbar">
+        <h1 id="page-title">Resumo</h1>
+        <span class="muted" id="welcome"></span>
+      </header>
+
+      <div id="toast" class="toast" role="status"></div>
+
+      <!-- RESUMO -->
+      <section id="section-summary" class="section">
+        <div class="grid stats" id="stats"></div>
+        <div class="grid two">
+          <div class="card">
+            <h2>Macros de hoje</h2>
+            <div id="macros"></div>
+          </div>
+          <div class="card">
+            <h2>Calorias (últimos 7 dias)</h2>
+            <div id="week-chart" class="chart"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Treinos recentes</h2>
+          <ul id="recent-workouts" class="list"></ul>
+        </div>
+      </section>
+
+      <!-- TREINOS -->
+      <section id="section-workouts" class="section hidden">
+        <div class="section-actions">
+          <button class="btn primary" id="new-workout">+ Novo treino</button>
+        </div>
+        <div id="workouts-list" class="grid cards"></div>
+      </section>
+
+      <!-- REFEIÇÕES -->
+      <section id="section-meals" class="section hidden">
+        <div class="section-actions">
+          <label class="inline-field">Dia
+            <input type="date" id="meal-date" />
+          </label>
+          <button class="btn primary" id="new-meal">+ Nova refeição</button>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="table" id="meals-table"></table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PERFIL -->
+      <section id="section-profile" class="section hidden">
+        <div class="card narrow">
+          <h2>Meus dados</h2>
+          <form id="profile-form" class="form">
+            <label class="field"><span>Nome</span><input type="text" name="name" required /></label>
+            <label class="field"><span>E-mail</span><input type="email" name="email" disabled /></label>
+            <div class="row">
+              <label class="field"><span>Peso (kg)</span><input type="number" name="weight" step="0.1" min="1" /></label>
+              <label class="field"><span>Altura (cm)</span><input type="number" name="height" step="0.1" min="1" /></label>
+            </div>
+            <label class="field"><span>Objetivo</span><input type="text" name="goal" placeholder="Ex.: Hipertrofia, emagrecimento..." /></label>
+            <p class="form-error" id="profile-error" role="alert"></p>
+            <button type="submit" class="btn primary">Salvar alterações</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal reutilizável para todos os formulários de criação/edição -->
+  <dialog id="modal" class="modal">
+    <form id="modal-form" class="form">
+      <h2 id="modal-title"></h2>
+      <div id="modal-fields"></div>
+      <p class="form-error" id="modal-error" role="alert"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="modal-cancel">Cancelar</button>
+        <button type="submit" class="btn primary" id="modal-submit">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
